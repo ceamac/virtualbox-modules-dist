@@ -4,7 +4,8 @@ set -e
 
 DISTRO='Debian~bullseye_amd64'
 
-LINK=$(curl https://www.virtualbox.org/wiki/Linux_Downloads | grep ".*${DISTRO}\.deb" | sed -e 's/^.*href="//' -e 's/".*$//')
+LINK="$1" # support to override the link to the deb for older builds
+[ -z "$LINK" ] && LINK=$(curl https://www.virtualbox.org/wiki/Linux_Downloads | grep ".*${DISTRO}\.deb" | sed -e 's/^.*href="//' -e 's/".*$//')
 FILE=${LINK##*/}
 VERSION=${FILE#*_}
 VERSION=${VERSION%%-*}
